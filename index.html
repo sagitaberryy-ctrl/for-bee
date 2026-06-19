@@ -83,27 +83,20 @@ to{transform:translateY(110vh);}
 
 <div class="center">
 <div id="login" class="card">
-<h2>🔒 Enter Our Special Date</h2>
-<p>can u guess our special date? </p>
-<input type="password" id="pass" placeholder="remember?">
+<h2>💗 One Little Question</h2>
+<p>Do you remember this date?</p>
+<input type="password" id="pass" placeholder="DDMMYYYY">
 <button onclick="checkPass()">Open</button>
-</div>
-
-<div id="game" class="card hidden">
-<h2>Who is the cutest person in this relationship? 🥺</h2>
-<button onclick="nextStep()">Me</button>
-<button onclick="nextStep()">You</button>
-<p id="answer"></p>
 </div>
 
 <div id="envelopeScreen" class="hidden">
 <div id="envelope">💌</div>
-<p style="color:white;font-weight:bold;">Open me, bee ❤️</p>
+<p style="color:white;font-weight:bold;">There's something I'd like to tell you 🤍</p>
 </div>
 
 <div id="letterScreen" class="card hidden">
-<h2>💌 A Little Letter For Bee</h2>
-<button onclick="playSong()">🎵 Play Our Song</button>
+<h2>💌 For You, Bee</h2>
+<button onclick="playSong()">🎵 Fall In Love With You</button>
 
 <div id="letter"></div>
 
@@ -141,16 +134,8 @@ Love u, bee. ❤️`;
 function checkPass(){
  if(document.getElementById('pass').value===password){
    document.getElementById('login').classList.add('hidden');
-   document.getElementById('game').classList.remove('hidden');
- } else alert('Wrong date 😝');
-}
-
-function nextStep(){
- document.getElementById('answer').innerHTML='Correct answer: BOTH OF US ❤️';
- setTimeout(()=>{
-   document.getElementById('game').classList.add('hidden');
    document.getElementById('envelopeScreen').classList.remove('hidden');
- },1200);
+ } else alert('Hmm.. try again');
 }
 
 document.getElementById('envelope').onclick=function(){
@@ -177,12 +162,12 @@ function startHearts(){
  setInterval(()=>{
    const h=document.createElement('div');
    h.className='heart';
-   h.innerHTML=['❤️','💕','💖','💗','💞'][Math.floor(Math.random()*5)];
+   h.innerHTML=['🤍','💌'][Math.floor(Math.random()*2)];
    h.style.left=Math.random()*100+'vw';
    h.style.animationDuration=(3+Math.random()*4)+'s';
    document.body.appendChild(h);
    setTimeout(()=>h.remove(),7000);
- },250);
+ },1200);
 }
 
 function playSong(){
