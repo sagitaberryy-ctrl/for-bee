@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Bee💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Quicksand',sans-serif;
+overflow:hidden;
+height:100vh;
+
+background-image:url("sunset.jpg");
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+}
+.center{
+position:absolute; inset:0; display:flex; flex-direction:column;
+align-items:center; justify-content:center; text-align:center; z-index:2;
+}
+.card{
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(10px);
+-webkit-backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.4);
+
+padding:24px;
+border-radius:20px;
+
+max-width:700px;
+width:85%;
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+input,button{
+padding:12px 18px;
+border-radius:15px;
+border:none;
+}
+
+button{
+cursor:pointer;
+background:#ff8fb1;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+background:#ff7aa4;
+}
+.hidden{display:none;}
+#envelope{
+font-size:110px; cursor:pointer;
+}
+#letter{
+white-space:pre-wrap;
+text-align:left;
+line-height:1.6;
+max-height:60vh;
+overflow:auto;
+padding:10px;
+}
+.heart{
+position:fixed;
+top:-30px;
+font-size:24px;
+animation:fall linear forwards;
+}
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
+</style>
+</head>
+<body>
+
+<div class="center">
+<div id="login" class="card">
+<h2>🔒 Enter Our Special Date</h2>
+<p>can u guess our special date? </p>
+<input type="password" id="pass" placeholder="remember?">
+<button onclick="checkPass()">Open</button>
+</div>
+
+<div id="game" class="card hidden">
+<h2>Who is the cutest person in this relationship? 🥺</h2>
+<button onclick="nextStep()">Me</button>
+<button onclick="nextStep()">You</button>
+<p id="answer"></p>
+</div>
+
+<div id="envelopeScreen" class="hidden">
+<div id="envelope">💌</div>
+<p style="color:white;font-weight:bold;">Open me, bee ❤️</p>
+</div>
+
+<div id="letterScreen" class="card hidden">
+<h2>💌 A Little Letter For Bee</h2>
+<button onclick="playSong()">🎵 Play Our Song</button>
+
+<div id="letter"></div>
+
+<audio id="song">
+  <source src="Fall in love with you.mp3" type="audio/mpeg">
+</audio>
+</div>
+</div>
+
+<script>
+const password="24032026";
+
+const message=`Hi bee,
+
+i just wanna say that i'm really grateful to have u in my life. Thank u for coming into my life and thank u for being my bf.
+
+i know our story wasn't perfect from the start. We got close then things happened and we lost contact for a while. tapi it's okay, that's all in the past now. Honestly, i'm just happy because somehow we found our way back to each other.
+
+i'm really happy that i got the chance to know u better and be ur gf. Even though i'm not perfect and i still have a lot of flaws, thank uu for staying. maaf ya if sometimes i'm difficult, overthink too much, or if i haven't been the best gf. i'm still learning too hehe.
+
+And bee, i really like u. sa suka ur cute jealous side, ur little possessive moments, the way u care about me and the way u always make me feel loved. u're handsome, sweet, adorable and honestly, u're one of my fav people.
+
+Thank u for helping me get through things that were hard for me. Mungkin bee tidak sadar but u've helped me more than u know and i'm really thankful for that.
+
+i hope we can always be honest with each other, trust each other, and communicate well. Kalo ada sesuatu yang bee tdk suka, atau ada hal yang bikin kepikiran, please tell me okay? Don't keep it to urself. i want us to talk about things together because we're a team.
+
+Let's learn together and take care of this relationship together too. sa tau hubungan tdk selalu mudah, but i hope we always choose each other and keep trying.
+
+And please remember, if u're ever feeling sad, tired, stressed, or not okay, u can always come to me. cerita aja yaa. i'll listen to u. sa mungkin tdk selalu punya solusi, but i will stay and listen. i'll be here for u, always.
+
+Take care of urself for me, okay? dan be kind to yourself too bee.
+
+Love u, bee. ❤️`;
+
+function checkPass(){
+ if(document.getElementById('pass').value===password){
+   document.getElementById('login').classList.add('hidden');
+   document.getElementById('game').classList.remove('hidden');
+ } else alert('Wrong date 😝');
+}
+
+function nextStep(){
+ document.getElementById('answer').innerHTML='Correct answer: BOTH OF US ❤️';
+ setTimeout(()=>{
+   document.getElementById('game').classList.add('hidden');
+   document.getElementById('envelopeScreen').classList.remove('hidden');
+ },1200);
+}
+
+document.getElementById('envelope').onclick=function(){
+ document.getElementById('envelopeScreen').classList.add('hidden');
+ document.getElementById('letterScreen').classList.remove('hidden');
+
+ document.getElementById("song").play();
+
+ typeMessage();
+ startHearts();
+}
+
+function typeMessage(){
+ let i=0;
+ let target=document.getElementById('letter');
+ let timer=setInterval(()=>{
+   target.textContent += message.charAt(i);
+   i++;
+   if(i>=message.length) clearInterval(timer);
+ },20);
+}
+
+function startHearts(){
+ setInterval(()=>{
+   const h=document.createElement('div');
+   h.className='heart';
+   h.innerHTML=['❤️','💕','💖','💗','💞'][Math.floor(Math.random()*5)];
+   h.style.left=Math.random()*100+'vw';
+   h.style.animationDuration=(3+Math.random()*4)+'s';
+   document.body.appendChild(h);
+   setTimeout(()=>h.remove(),7000);
+ },250);
+}
+
+function playSong(){
+ document.getElementById("song").play();
+}</script>
+</body>
+</html>
